@@ -1,8 +1,19 @@
+<!-- 
+RULES TO FOLLOW BEFORE CONTRIBUTING:
+
+Please refer to the README.md and install the extensions provided.
+Images/Flowcharts should go inside the images directory.
+Helpful comments are provided above the section for further info.
+Comments should be added by the respective contributor to ensure the report is well documented.
+ -->
+
+<!-- Picture of IITG and KU goes here; refer to the BSM document sent in the group chat -->
 # Internship Report
 
 <!-- to insert a page break -->
 <div style="page-break-after: always;"></div>
 
+<!-- The Table of content autopopulates as new sections are added; no need to manually make changes -->
 # Table of contents
 - [Internship Report](#internship-report)
 - [Table of contents](#table-of-contents)
