@@ -108,6 +108,11 @@ For each row $N_{S\_A}$ and $N_{Q}$ in $SVQA\_D$:
     - Error
 
 #### Output
+One of the dataset namely "Positional Reasoning" is shown as an example output containing Type 1 error:
+Training            |  Validation
+:-------------------------:|:-------------------------:
+![train positional reasoning type1](./images/type_1/t-pr.jpg)   |  ![val positional reasoning type1](./images/type_1/v-pr.jpg)
+
 ## Type 2 Error (Grammatical Error)
 
 In this section, our focus is on Type 2 errors, with a specific goal of enhancing grammatical precision within the VQA-SQVA datasets. These datasets prominently include columns such as "long\_answer," "short\_answer," and "question." Our primary objective is to improve the grammatical accuracy of the long\_answer in the context of question and short\_answer pairs. To achieve this, we've developed an advanced methodology that combines the capabilities of SpaCy and Language Tool (LT) specialized in grammar checking and proofreading. By leveraging these techniques, we identify and rectify grammatical errors with a high degree of precision.
@@ -212,6 +217,10 @@ For each row $R_{SVQA\_TDIUC}$ in $SVQA\_TDIUC$:
   - The sentence carries Type 3 and Type 1 errors.
 
 #### Output
+One of the dataset namely "Object Presence" is shown as an example output containing common errors:
+Training            |  Validation
+:-------------------------:|:-------------------------:
+![train object presence common error](./images/common_errors/t-op.png)   |  ![val object presence common error](./images/common_errors/v-op.png)
 
 # Conclusion
 lorem ipsum
