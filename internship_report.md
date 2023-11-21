@@ -13,15 +13,20 @@ Comments should be added by the respective contributor to ensure the report is w
 <!-- use this to insert a page break -->
 <div style="page-break-after: always;"></div>
 
+# Acknowledgement
+lorem ipsum
+
+# Abstract
+lorem ipsum
+
 <!-- The Table of content autopopulates as new sections are added; no need to manually make changes -->
 # Table of contents
 - [Internship Report](#internship-report)
-- [Table of contents](#table-of-contents)
 - [Acknowledgement](#acknowledgement)
 - [Abstract](#abstract)
+- [Table of contents](#table-of-contents)
 - [Project Objectives](#project-objectives)
   - [Understanding the dataset](#understanding-the-dataset)
-  - [Creation of a data preprocessing pipeline](#creation-of-a-data-preprocessing-pipeline)
 - [Methodology](#methodology)
 - [Data correction](#data-correction)
   - [Approaches](#approaches)
@@ -34,29 +39,20 @@ Comments should be added by the respective contributor to ensure the report is w
 - [Error Analysis](#error-analysis)
   - [Type 1 Error (Context Error)](#type-1-error-context-error)
       - [Algorithm](#algorithm-2)
-      - [Flowchart](#flowchart-2)
       - [Output](#output)
   - [Type 2 Error (Grammatical Error)](#type-2-error-grammatical-error)
       - [Algorithm](#algorithm-3)
-      - [Flowchart](#flowchart-3)
       - [Output](#output-1)
   - [Type 3 Error (Typographical Error)](#type-3-error-typographical-error)
       - [Algorithm](#algorithm-4)
-      - [Flowchart](#flowchart-4)
       - [Output](#output-2)
   - [Finding Commonalities in the Error](#finding-commonalities-in-the-error)
       - [Algorithm](#algorithm-5)
-      - [Flowchart](#flowchart-5)
+      - [Flowchart](#flowchart-2)
       - [Output](#output-3)
 - [Conclusion](#conclusion)
 
 <div style="page-break-after: always;"></div>
-
-# Acknowledgement
-lorem ipsum
-
-# Abstract
-lorem ipsum
 
 # Project Objectives
 <div>The Task Directed Image Understanding Challenge (TDIUC) dataset is a collection of data for Visual Question Answering (VQA). It comprises 1.6 million questions and 170,000 images gathered from sources like MS COCO and the Visual Genome Dataset. Each question posses an short answer. These questions are paired with images and categorized into 12 distinct groups. The various question categories are briefly defined in the Table 1.
@@ -72,8 +68,6 @@ Gramformer [7], a transformer-based model. The table in 2 provides a summary of 
 ![Getting Started](./images/5.jpg)
 </div>
 
-## Creation of a data preprocessing pipeline 
-
 # Methodology
 lorem ipsum
 
@@ -88,14 +82,72 @@ lorem ipsum
 
 # Error Analysis
 ## Type 1 Error (Context Error)
+
+Our focus is on the identification of Type-1 errors, specifically contextual errors (CEC), within the SQVA datasets. The dataset comprises three pivotal columns: "long\_answer," "short\_answer," and "question." The core of our task lies in assessing the contextual accuracy of the "long\_answer" concerning a given pair of question and "short\_answer". To achieve this, we devised a systematic pipeline aimed at detecting Type-1 errors.
+
+Our approach delves into the linguistic complexities of the dataset. We initiate the process by examining instances where the "short\_answer" is a single word, and the "question" is presented as an interrogative sentence. For these cases, we employ the Natural Language Toolkit (NLTK) library to extract nouns from both the "short\_answer" and the "question". These extracted nouns serve as critical anchors for contextual validation.
+
+The next step involves comparing these nouns with the "long\_answer" sentence. If all the identified nouns are found within the "long\_answer", the Type-1 error is marked as 0, indicating that the answer is contextually correct. However, if even one of the nouns is absent in the "long\_answer", the Type-1 error is flagged as 1, signifying a contextual mismatch.
+
+Through this innovative methodology, we aim to contribute significantly to the refinement of contextual understanding within the realm of question-answering systems, paving the way for more precise and accurate information retrieval. This rigorous approach ensures a careful evaluation, enhancing the quality and reliability of the VQA-SQVA datasets. The enriched dataset provides valuable insights into the contextual accuracy of "long\_answers" in the context of given "question" and "short\_answer" pairs within the VQA-SQVA datasets.
+
 #### Algorithm
-#### Flowchart
+
+1. **Input:** $SVQA$ Dataset $(SVQA\_D)$ with Long Answer $(L\_A)$, Short Answer $(S\_A)$, and Question $(Q)$
+2. **Output:** Context Error-free Sentences
+
+Procedure:
+
+- Tokenize $S\_A$ and $Q$ using NLTK library
+- Extract Noun from $S\_A$ ($N_{S\_A}$) and $Q$ ($N_{Q}$) using NLTK library
+
+For each row $N_{S\_A}$ and $N_{Q}$ in $SVQA\_D$:
+
+- If $N_{S\_A}$ is in $L\_A$ or $N_{Q}$ is in $L\_A$:
+    - No error
+- Else:
+    - Error
+
 #### Output
 ## Type 2 Error (Grammatical Error)
+
+In this section, our focus is on Type 2 errors, with a specific goal of enhancing grammatical precision within the VQA-SQVA datasets. These datasets prominently include columns such as "long\_answer," "short\_answer," and "question." Our primary objective is to improve the grammatical accuracy of the long\_answer in the context of question and short\_answer pairs. To achieve this, we've developed an advanced methodology that combines the capabilities of SpaCy and Language Tool (LT) specialized in grammar checking and proofreading. By leveraging these techniques, we identify and rectify grammatical errors with a high degree of precision.
+
+The code block includes conditions to filter and select specific errors, and the rules are as follows:
+
+1. **match.ruleId != \`THE\_FALL\_SEASON' and match.ruleId != \`ADJECTIVE\_IN\_ATTRIBUTE':** This condition excludes errors with rule IDs \`THE\_FALL\_SEASON' and \`ADJECTIVE\_IN\_ATTRIBUTE'. Errors with these specific rule IDs are not considered.
+
+2. **match.category != \`NOUN':** This condition excludes errors categorized as \`NOUN'. Errors labeled as \`NOUN' are not added to the errors list.
+
+3. **\`mildly offensive' not in match.message:** Errors with messages containing the phrase \`mildly offensive' are excluded, filtering out potentially offensive language.
+
+4. **\`spelling mistake' not in match.message:** This condition filters out errors with messages containing \`spelling mistake'. Errors related to spelling mistakes are not included.
+
+5. **\`capitalized because it’s a trademark' not in match.message:** Errors with messages containing \`capitalized because it’s a trademark' are excluded from the errors list.
+
+6. **\`sentence fragment' not in match.message:** Errors with messages containing \`sentence fragment' are filtered out, indicating that complete sentences are considered errors.
+
+7. **\`typographical error' not in match.message:** Errors related to typographical errors are excluded if \`typographical error' is found in the error message.
+
+8. **\`Don’t put a space before the full stop' not in match.message:** Errors with messages containing \`Don’t put a space before the full stop' are excluded, indicating a specific type of spacing error.
+
+Errors that do not meet these conditions will be appended to the errors list, enabling the code to capture and report specific types of grammatical errors while excluding others based on the specified criteria.
+
+The outcome of this sophisticated error correction process is a refined dataset with successfully addressed grammatical inaccuracies. This meticulous approach significantly contributes to the improvement of grammatical precision and the overall quality of the VQA-SQVA datasets. Our innovative methodology paves the way for more accurate and grammatically precise information retrieval within the domain of question-answering systems, resulting in a dataset with significantly enhanced grammatical accuracy.
+
 #### Algorithm
-#### Flowchart
 #### Output
+
 ## Type 3 Error (Typographical Error)
+
+In this section, our focus is on Type 3 errors, specifically directed at improving typographical precision within the VQA-SQVA datasets. These datasets prominently include columns such as "long\_answer," "short\_answer," and "question." Our primary objective is to enhance the typographical accuracy of the "long\_answer" within the context of question and "short\_answer" pairs. To achieve this, we have developed an advanced methodology that efficiently identifies and corrects typographical errors using the Language Tool (LT) technique.
+
+Our approach involves a thorough analysis of the text content within the "long\_answer" columns. Unlike Type 2 errors, which concentrated on grammatical aspects, we focus on examining entire sentences within these columns. Through the application of typo error detection techniques, we can identify and rectify various typographical inaccuracies, including misspellings, punctuation issues, and spacing errors. The code block encompasses the following errors:
+
+1. **match.ruleId:** It checks whether the error is associated with specific grammar rules such as \`WHITESPACE\_RULE', \`COMMA\_PARENTHESIS\_WHITESPACE', \`ENGLISH\_WORD\_REPEAT\_RULE', \`APOS\_SPACE\_CONTRACTION', \`POSSESSIVE\_APOSTROPHE'.
+   
+2. **match.message:** It verifies whether the error message contains certain phrases like \`sentence fragment,' \`Do not put a space before the full stop,' \`spelling mistake,' and excludes instances of \`British English' (excluding British English spelling mistakes).
+
 #### Algorithm
 
 **Require**: SVQA Dataset (SVQA_D) with Long_Answer (L_A) <br>
@@ -114,12 +166,11 @@ Initializes the language tool
 *no error*
 <br>
 => **end if**
-#### Flowchart
 #### Output
-Here is the Visual representation of the color datasets:-
+Here is the Visual representation of the color datasets:
 Training            |  Validation
 :-------------------------:|:-------------------------:
-![Getting Started](./images/train_color.png)   |  ![Getting Started](./images/val_color.png)
+![train color type3](./images/train_color.png)   |  ![val color type3](./images/val_color.png)
 
 
 
