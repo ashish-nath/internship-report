@@ -46,9 +46,8 @@ lorem ipsum
   - [Type 3 Error (Typographical Error)](#type-3-error-typographical-error)
       - [Algorithm](#algorithm-4)
       - [Output](#output-2)
-  - [Finding Commonalities in the Error](#finding-commonalities-in-the-error)
+  - [Finding Commonalities between the Errors](#finding-commonalities-between-the-errors)
       - [Algorithm](#algorithm-5)
-      - [Flowchart](#flowchart-2)
       - [Output](#output-3)
 - [Conclusion](#conclusion)
 
@@ -96,7 +95,7 @@ Through this innovative methodology, we aim to contribute significantly to the r
 1. **Input:** $SVQA$ Dataset $(SVQA\_D)$ with Long Answer $(L\_A)$, Short Answer $(S\_A)$, and Question $(Q)$
 2. **Output:** Context Error-free Sentences
 
-Procedure:
+**Procedure:**
 
 - Tokenize $S\_A$ and $Q$ using NLTK library
 - Extract Noun from $S\_A$ ($N_{S\_A}$) and $Q$ ($N_{Q}$) using NLTK library
@@ -175,9 +174,45 @@ Training            |  Validation
 
 
 
-## Finding Commonalities in the Error
+## Finding Commonalities between the Errors
+In this research paper, our focus was on the analysis and categorization of errors within a given VQA-SVQA dataset. These errors were classified into three types: Type 1, Type 2, and Type 3, each represented by binary values (1 indicating the presence of the error and 0 indicating its absence). The primary objective was to identify rows in the dataset containing more than one type of error. To achieve this, a systematic approach was followed.
+
+Initially, we considered four possible combinations of errors in a single row: "Type 1 and Type 2," "Type 2 and Type 3," "Type 1 and Type 3," and "Type 1 and Type 2 and Type 3." For each combination, an algorithm was developed to check the corresponding values in the dataset. For example, if Type 1 and Type 2 both had values of 1 while Type 3 had a value of 0, the row was identified as having the "Type 1 and Type 2" error combination. Similar checks were performed for the other combinations.
+
+Additionally, we visualized the frequency of these error combinations using Matplotlib, creating a graph that provided a clear overview of the error distribution in the VQA-SVQA dataset. Through this systematic approach, we efficiently identified and categorized rows with multiple errors, laying the groundwork for a comprehensive understanding of error patterns in the given dataset.
+
+**Methodology:**
+
+1. **Error Classification:**
+   Errors in the dataset were classified into three types: Type 1, Type 2, and Type 3. Each error type was represented by binary values, where 1 indicated the presence of the error and 0 indicated its absence.
+
+2. **Identification of Error Combinations:**
+   Four possible combinations of errors were considered: "Type 1 and Type 2," "Type 2 and Type 3," "Type 1 and Type 3," and "Type 1 and Type 2 and Type 3." An algorithm was developed to check the presence of errors in each combination for every row in the dataset.
+
+3. **Algorithm Implementation:**
+   The algorithm verified if Type 1 and Type 2 had a value of 1 and Type 3 had a value of 0 for the "Type 1 and Type 2" combination (and similarly for other combinations). Rows meeting the criteria for one of the four error combinations were identified.
+
 #### Algorithm
-#### Flowchart
+
+1. **Input:** All three error types are represented by binary values: 1 for the presence of the error and 0 for the absence of the error, for the SVQA-TDIUC Dataset.
+2. **Output:** Visualize the frequency of four error combinations.
+
+**Procedure**:
+
+For each row $R_{SVQA\_TDIUC}$ in $SVQA\_TDIUC$:
+
+- If $Type 1$ and $Type 2$ errors both equal 1:
+  - If $Type 3$ error equals 1:
+    - The sentence carries all errors.
+  - Else:
+    - The sentence carries Type 1 and Type 2 errors.
+
+- If $Type 2$ and $Type 3$ errors both equal 1:
+  - The sentence carries Type 2 and Type 3 errors.
+
+- Else, if $Type 3$ and $Type 1$ errors both equal 1:
+  - The sentence carries Type 3 and Type 1 errors.
+
 #### Output
 
 # Conclusion
