@@ -9,6 +9,7 @@ Comments should be added by the respective contributor to ensure the report is w
 
 <!-- Picture of IITG and KU goes here; refer to the BSM document sent in the group chat -->
 # Internship Report
+<!-- Development of a Data cleaning and correction pipeline -->
 
 <!-- use this to insert a page break -->
 <div style="page-break-after: always;"></div>
@@ -115,6 +116,7 @@ By following these steps, the research team systematically improved the dataset'
 
 #### Flowchart
 ![Flowchart LLM](./images/flowchart-llm.png)
+
 # Error Analysis
 ## Type 1 Error (Context Error)
 
