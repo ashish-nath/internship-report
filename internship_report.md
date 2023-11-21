@@ -14,10 +14,12 @@ Comments should be added by the respective contributor to ensure the report is w
 <div style="page-break-after: always;"></div>
 
 # Acknowledgement
-lorem ipsum
+We extend our heartfelt gratitude to our supervisor, Dr. Nazreena Rahman, Prof. Prthwijit Guha (EEE Dept.) and Prof. Ashish Anand (CSE Dept.), for their unwavering support and invaluable guidance. We are deeply appreciative of Indian Institute of Technology Guwahati (IITG) and The Assam Kaziranga University for allowing us to engage in this insightful mentorship, and to the countless forums and documentations for providing essential resources.
+
+We would also like to express our sincere thanks to our faculties and seniors for their understanding and encouragement throughout this journey. Their unwavering support was instrumental in overcoming challenges and meeting deadlines. This project's success is a result of the collective contributions and support from these individuals, and for that, We are truly grateful.
 
 # Abstract
-Development of Data cleaning and correction pipeline was made possible using modern tech
+A Data cleaning and correction pipeline for TDUIC SVQA dataset containing upwards of 1.4M rows was developed using tools like Large Language Model, In-Context Learning and Python Libraries like NLTK and SpaCy.
 
 <!-- The Table of content autopopulates as new sections are added; no need to manually make changes -->
 # Table of contents
@@ -257,4 +259,4 @@ Training            |  Validation
 ![train object presence common error](./images/common_errors/t-op.png)   |  ![val object presence common error](./images/common_errors/v-op.png)
 
 # Conclusion
-lorem ipsum
+A pipeline for Data correction and cleaning of the TDUIC SQVA dataset have been successfully facilitated which is able to detect and correct multi faceted errors using technologies like Large Language Model, In-Context Learning and Python Libraries like NLTK and SpaCy.
