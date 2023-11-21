@@ -17,7 +17,7 @@ Comments should be added by the respective contributor to ensure the report is w
 lorem ipsum
 
 # Abstract
-lorem ipsum
+Development of Data cleaning and correction pipeline was made possible using modern tech
 
 <!-- The Table of content autopopulates as new sections are added; no need to manually make changes -->
 # Table of contents
@@ -34,20 +34,19 @@ lorem ipsum
       - [Algorithm](#algorithm)
       - [Flowchart](#flowchart)
     - [Approach #2 (LLM method)](#approach-2-llm-method)
-      - [Algorithm](#algorithm-1)
       - [Flowchart](#flowchart-1)
 - [Error Analysis](#error-analysis)
   - [Type 1 Error (Context Error)](#type-1-error-context-error)
-      - [Algorithm](#algorithm-2)
+      - [Algorithm](#algorithm-1)
       - [Output](#output)
   - [Type 2 Error (Grammatical Error)](#type-2-error-grammatical-error)
-      - [Algorithm](#algorithm-3)
+      - [Algorithm](#algorithm-2)
       - [Output](#output-1)
   - [Type 3 Error (Typographical Error)](#type-3-error-typographical-error)
-      - [Algorithm](#algorithm-4)
+      - [Algorithm](#algorithm-3)
       - [Output](#output-2)
   - [Finding Commonalities between the Errors](#finding-commonalities-between-the-errors)
-      - [Algorithm](#algorithm-5)
+      - [Algorithm](#algorithm-4)
       - [Output](#output-3)
 - [Conclusion](#conclusion)
 
@@ -68,17 +67,52 @@ Gramformer [7], a transformer-based model. The table in 2 provides a summary of 
 </div>
 
 # Methodology
-lorem ipsum
 
-# Data correction
-## Approaches
-### Approach #1 (nltk method)
-#### Algorithm
-#### Flowchart
-### Approach #2 (LLM method)
-#### Algorithm
-#### Flowchart
+## Data correction
 
+The process of analyzing the "long answer" column and implementing corrections is a complex task for various reasons. Firstly, the sheer volume of data, featuring 11 different categories, presents a significant challenge. Each group contains numerous entries that require individual examination and correction when necessary.
+
+Secondly, the nature of the errors demands sophisticated techniques for identification and correction. Additionally, context errors have emerged, where an entry does not align with its surrounding information or is inappropriate for its given situation. Addressing these context errors often necessitates additional domain-specific knowledge and manual review.
+
+To address these challenges, we employ scripting techniques and Large Language Model-based (LLM) approaches. These methods enhance efficiency, reduce human error, and enable the processing of large amounts of data in a relatively short time.
+
+Despite the enormity of the task involving extensive data and various error types, we successfully clean up the dataset, enhancing its overall quality.
+
+
+1. **Dataset Analysis:**
+   - Given VQA-SQVA datasets in CSV format with "long\_answer," "short\_answer," and "question" columns.
+   - Identified errors by cross-referencing "long\_answer" with "short\_answer"; discrepancies were flagged for correction.
+
+2. **Model Selection and Training:**
+   - Utilized ChatGPT 3.5 as the Language Learning Model (LLM) for its ability to comprehend context and generate coherent responses, crucial for understanding nuances in question-answer pairs.
+   - Applied prompt engineering and implemented In-Context Learning (ICL). The model was trained with specific question & short\_answer pairs, enabling it to grasp relationships between questions and corresponding short\_answers.
+     - Example: Several triplets like these were given to the LLM:
+       - Question: "What color is the sky?"
+       - Short\_answer: "blue"
+       - Long\_answer: "The color of the sky is blue."
+     - The LLM was then asked to answer the value in "long\_answer":
+       - question:"What color is the car?"
+       - short\_answer:"red"
+       - long\_answer: (Here the LLM responds)
+   - Evaluated the model's responses iteratively, considering contextual correctness and coherence, and fine-tuned the training based on evolving performance.
+
+3. **Iterative Processing:**
+   - Divided the dataset into chunks of 50 rows due to input constraints.
+   - Applied the trained ChatGPT iteratively on each chunk, generating 50 correct long\_answers for each question & short\_answer pair in the chunk.
+
+4. **Data Integration and Refinement:**
+   - Structured the output (50 long\_answers) in a single-column CSV format.
+   - Appended the generated long\_answers to a file, forming a refined dataset.
+   - Merged the refined dataset with the original, replacing erroneous values in the "long\_answer" column.
+
+5. **Error Anticipation and Resolution:**
+   - Acknowledged the possibility of introducing errors during modification.
+   - Planned to address remaining errors using error detection methods in subsequent stages of the research pipeline.
+
+By following these steps, the research team systematically improved the dataset's accuracy, laying the foundation for further enhancements and error resolution in the subsequent phases of the project.
+
+#### Flowchart
+![Flowchart LLM](./images/flowchart-llm.png)
 # Error Analysis
 ## Type 1 Error (Context Error)
 
@@ -92,17 +126,17 @@ Through this innovative methodology, we aim to contribute significantly to the r
 
 #### Algorithm
 
-1. **Input:** $SVQA$ Dataset $(SVQA\_D)$ with Long Answer $(L\_A)$, Short Answer $(S\_A)$, and Question $(Q)$
+1. **Input:** *SVQA* Dataset *(SVQA\_D)* with Long Answer *(L\_A)*, Short Answer *(S\_A)*, and Question *(Q)*
 2. **Output:** Context Error-free Sentences
 
 **Procedure:**
 
-- Tokenize $S\_A$ and $Q$ using NLTK library
-- Extract Noun from $S\_A$ ($N_{S\_A}$) and $Q$ ($N_{Q}$) using NLTK library
+- Tokenize *S\_A* and *Q* using NLTK library
+- Extract Noun from *S\_A* (*N<sub>S\_A</sub>*) and *Q* (*N<sub>Q</sub>*) using NLTK library
 
-For each row $N_{S\_A}$ and $N_{Q}$ in $SVQA\_D$:
+For each row *N<sub>S\_A</sub>* and *N<sub>Q</sub>* in SVQA\_D:
 
-- If $N_{S\_A}$ is in $L\_A$ or $N_{Q}$ is in $L\_A$:
+- If *N<sub>S\_A</sub>* is in *L\_A* or *N<sub>Q</sub>* is in *L\_A*:
     - No error
 - Else:
     - Error
@@ -202,18 +236,18 @@ Additionally, we visualized the frequency of these error combinations using Matp
 
 **Procedure**:
 
-For each row $R_{SVQA\_TDIUC}$ in $SVQA\_TDIUC$:
+For each row R<sub>SVQA\_TDIUC</sub> in SVQA\_TDIUC:
 
-- If $Type 1$ and $Type 2$ errors both equal 1:
-  - If $Type 3$ error equals 1:
+- If *Type 1* and *Type 2* errors both equal 1:
+  - If *Type 3* error equals 1:
     - The sentence carries all errors.
   - Else:
     - The sentence carries Type 1 and Type 2 errors.
 
-- If $Type 2$ and $Type 3$ errors both equal 1:
+- If *Type 2* and *Type 3* errors both equal 1:
   - The sentence carries Type 2 and Type 3 errors.
 
-- Else, if $Type 3$ and $Type 1$ errors both equal 1:
+- Else, if *Type 3* and *Type 1* errors both equal 1:
   - The sentence carries Type 3 and Type 1 errors.
 
 #### Output
