@@ -165,14 +165,12 @@ Initializes the language tool
 *no error*
 <br>
 => **end if**
+
 #### Output
 Here is the Visual representation of the color datasets:
 Training            |  Validation
 :-------------------------:|:-------------------------:
 ![train color type3](./images/train_color.png)   |  ![val color type3](./images/val_color.png)
-
-
-
 
 ## Finding Commonalities between the Errors
 In this research paper, our focus was on the analysis and categorization of errors within a given VQA-SVQA dataset. These errors were classified into three types: Type 1, Type 2, and Type 3, each represented by binary values (1 indicating the presence of the error and 0 indicating its absence). The primary objective was to identify rows in the dataset containing more than one type of error. To achieve this, a systematic approach was followed.
