@@ -8,8 +8,35 @@ Comments should be added by the respective contributor to ensure the report is w
  -->
 
 <!-- Picture of IITG and KU goes here; refer to the BSM document sent in the group chat -->
-# Internship Report
+## Internship Report
 <!-- Development of a Data cleaning and correction pipeline -->
+# <center>Development of a Data Cleaning and Correction Pipeline</center>
+
+<center><h2>Submitted By:</h2></center><br>
+<center>
+  - Ashish Nath (ET20BTHCS019)<br>
+  - Parash Protim Khargharia (ET20BTHCS012)<br>
+  - Abhinav Borah (ET20BTHCS042)<br>
+  - Joydeep Rabha (ET20BTHCS005)<br>
+</center>
+<br>
+<center><h2>Under the Guidance of:</h2></center>
+<center>
+  - Prof. Prthwijit Guha (EEE Dept.)<br>
+  - Prof. Ashish Anand (CSE Dept.)<br>
+  - Dr. Nazreena Rahman<br>
+</center>
+
+<center><h2>Institution:</h2></center>
+<center><h1>The Assam Kaziranga University</h1></center>
+
+<center><h5>Date: 1/July/2023 - 30/Sept/2023</center>
+
+---
+
+<!-- <center>*This report is submitted as a partial fulfillment of the requirements for [Insert Degree/Major].*</center> -->
+
+<br>
 
 <!-- use this to insert a page break -->
 <div style="page-break-after: always;"></div>
@@ -24,32 +51,29 @@ A Data cleaning and correction pipeline for TDUIC SVQA dataset containing upward
 
 <!-- The Table of content autopopulates as new sections are added; no need to manually make changes -->
 # Table of contents
-- [Internship Report](#internship-report)
+- [Development of a Data Cleaning and Correction Pipeline](#development-of-a-data-cleaning-and-correction-pipeline)
 - [Acknowledgement](#acknowledgement)
 - [Abstract](#abstract)
 - [Table of contents](#table-of-contents)
 - [Project Objectives](#project-objectives)
   - [Understanding the dataset](#understanding-the-dataset)
 - [Methodology](#methodology)
-- [Data correction](#data-correction)
-  - [Approaches](#approaches)
-    - [Approach #1 (nltk method)](#approach-1-nltk-method)
-      - [Algorithm](#algorithm)
+  - [Data correction](#data-correction)
       - [Flowchart](#flowchart)
-    - [Approach #2 (LLM method)](#approach-2-llm-method)
-      - [Flowchart](#flowchart-1)
 - [Error Analysis](#error-analysis)
   - [Type 1 Error (Context Error)](#type-1-error-context-error)
-      - [Algorithm](#algorithm-1)
+      - [Algorithm](#algorithm)
       - [Output](#output)
   - [Type 2 Error (Grammatical Error)](#type-2-error-grammatical-error)
-      - [Algorithm](#algorithm-2)
+      - [Algorithm](#algorithm-1)
+- [Steps to Find Grammatical Error](#steps-to-find-grammatical-error)
       - [Output](#output-1)
   - [Type 3 Error (Typographical Error)](#type-3-error-typographical-error)
-      - [Algorithm](#algorithm-3)
+      - [Algorithm](#algorithm-2)
+- [Steps to Find Typographical Error](#steps-to-find-typographical-error)
       - [Output](#output-2)
   - [Finding Commonalities between the Errors](#finding-commonalities-between-the-errors)
-      - [Algorithm](#algorithm-4)
+      - [Algorithm](#algorithm-3)
       - [Output](#output-3)
 - [Conclusion](#conclusion)
 
@@ -178,7 +202,28 @@ Errors that do not meet these conditions will be appended to the errors list, en
 The outcome of this sophisticated error correction process is a refined dataset with successfully addressed grammatical inaccuracies. This meticulous approach significantly contributes to the improvement of grammatical precision and the overall quality of the VQA-SQVA datasets. Our innovative methodology paves the way for more accurate and grammatically precise information retrieval within the domain of question-answering systems, resulting in a dataset with significantly enhanced grammatical accuracy.
 
 #### Algorithm
+# Steps to Find Grammatical Error
+
+**Algorithm 1:**
+
+**Input:** SVQA Dataset (SVQA_D) with Long Answer (L_A)
+
+**Output:** Grammatical Error-free Sentences
+
+1. Import necessary libraries.
+2. Initializes the language tool and loads a spaCy English language model.
+
+For each row \(L_A \in SVQA_D\):
+   - If errors that meet certain criteria:
+      - Appended to the `errors` list.
+   - Else:
+      - No error.
+
 #### Output
+One of the dataset namely "Counting" is shown as an example output containing Type 2 error:
+Training            |  Validation
+:-------------------------:|:-------------------------:
+![train counting type2](./images/type_2/train_counting.png)   |  ![val counting type2](./images/type_2/val_counting.png)
 
 ## Type 3 Error (Typographical Error)
 
@@ -192,28 +237,29 @@ Our approach involves a thorough analysis of the text content within the "long\_
 
 #### Algorithm
 
-**Require**: SVQA Dataset (SVQA_D) with Long_Answer (L_A) <br>
-**Ensure**: *typographical* Error free sentences 
-<br>
-*Import necessary libraries*
-<br>
-Initializes the language tool
-<br>
-=> for each row L_A ∈ SVQA_D **do**
-<br>
-=> **if** *Errors that meet certain criteria* **then** *appended to the ‘errors′ list*
-<br>
-=> **else**
-<br>
-*no error*
-<br>
-=> **end if**
+# Steps to Find Typographical Error
+
+**Algorithm 1:**
+
+**Input:** SVQA Dataset (SVQA_D) with Long Answer (L_A)
+
+**Output:** Typographical Error-free Sentences
+
+1. Import necessary libraries.
+2. Initializes the language tool.
+
+For each row \(L_A \in SVQA_D\):
+   - If errors that meet certain criteria:
+      - Appended to the `errors` list.
+   - Else:
+      - No error.
+
 
 #### Output
-Here is the Visual representation of the color datasets:
+One of the dataset namely "Color" is shown as an example output containing Type 3 error:
 Training            |  Validation
 :-------------------------:|:-------------------------:
-![train color type3](./images/train_color.png)   |  ![val color type3](./images/val_color.png)
+![train color type3](./images/type_3/train_color.png)   |  ![val color type3](./images/type_3/val_color.png)
 
 ## Finding Commonalities between the Errors
 In this research paper, our focus was on the analysis and categorization of errors within a given VQA-SVQA dataset. These errors were classified into three types: Type 1, Type 2, and Type 3, each represented by binary values (1 indicating the presence of the error and 0 indicating its absence). The primary objective was to identify rows in the dataset containing more than one type of error. To achieve this, a systematic approach was followed.
